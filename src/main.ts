@@ -5,13 +5,23 @@ import { setupSwagger } from './config/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  /**Global Pipes */
+
+  // Enable CORS for all routes
+  app.enableCors();
+
+  // Global Pipes
   app.useGlobalPipes(GlobalValidationPipe);
 
   // Setup Swagger
   setupSwagger(app);
 
-  await app.listen(process.env.PORT ?? 3001);
+  const port = process.env.PORT ?? 3001;
+  await app.listen(port);
+
+  // Log the URLs
+  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Health endpoint at http://localhost:${port}/health`);
+  console.log(`Swagger docs at http://localhost:${port}/api-docs`);
 }
 
 bootstrap();
