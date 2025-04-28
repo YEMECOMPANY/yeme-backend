@@ -1,21 +1,16 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { GlobalValidationPipe } from './common/pipes/validation.pipes';
+import { setupSwagger } from './config/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  /**
-   * Swagger Configuration
-   */
-  const config = new DocumentBuilder()
-    .setTitle('Yeme API')
-    .setDescription('Yeme API Description')
-    .setVersion('1.0')
-    .addTag('yeme')
-    .build();
+  /**Global Pipes */
+  app.useGlobalPipes(GlobalValidationPipe);
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  // Setup Swagger
+  setupSwagger(app);
+
   await app.listen(process.env.PORT ?? 3001);
 }
 

@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: yeme_api
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${PORT:-3001}:${PORT:-3001}
+    command: npm run start:dev
+    env_file:
+      - .env.development
+    networks:
+      - yeme-network
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: yeme_postgres
+    image: postgres:15
+    networks:
+      - yeme-network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - ${DB_PORT:-5432}:5432
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_DB: ${DB_DATABASE:-yeme_dev}
+      PG_DATA: /var/lib/postgresql/data
+
+networks:
+  yeme-network:
+
+volumes:
+  postgres_data:

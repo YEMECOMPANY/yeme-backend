@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  api-test:
+    container_name: yeme_api_test
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    env_file:
+      - .env.test
+    networks:
+      - yeme-network-test
+    command: npm run test
+    depends_on:
+      - postgres-test
+
+  postgres-test:
+    container_name: yeme_postgres_test
+    image: postgres:15
+    networks:
+      - yeme-network-test
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_DB: ${DB_DATABASE:-yeme_test}
+    tmpfs:
+      - /var/lib/postgresql/data # Using tmpfs for faster test database
+
+networks:
+  yeme-network-test:

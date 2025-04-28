@@ -1,0 +1,42 @@
+# Git
+.git
+.gitignore
+
+# Dependency directories
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Environment variables
+.env*
+!.env.example
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Editor directories
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test files
+coverage/
+.nyc_output/
+
+# IDE specific files
+.cursor/
+AppInfo/ 
