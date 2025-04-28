@@ -1,0 +1,46 @@
+### Login as regular user
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "Password123!"
+}
+
+### Test admin-only endpoint with regular user token (should return 403)
+GET http://localhost:3001/protected/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1kM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMTciLCJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDU4Mjc3MDksImV4cCI6MTc0NTkxNDEwOSwiYXVkIjoieWVtZS1hcGkiLCJpc3MiOiJ5ZW1lIn0.Bjxo54kMdwHiynbQd_n4Msaga18vGJ7PeXDP3Bc4F6Q
+
+### Test merchant-only endpoint with regular user token (should return 403)
+GET http://localhost:3001/protected/merchant
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1kM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMTciLCJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDU4Mjc3MDksImV4cCI6MTc0NTkxNDEwOSwiYXVkIjoieWVtZS1hcGkiLCJpc3MiOiJ5ZW1lIn0.Bjxo54kMdwHiynbQd_n4Msaga18vGJ7PeXDP3Bc4F6Q
+
+### The following requests require admin/merchant users
+
+### Login as admin
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "AdminPassword123!"
+}
+
+### Test admin-only endpoint with admin token
+### Replace with your admin token from the login response
+GET http://localhost:3001/protected/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1mM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMjgiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQ1ODI3NzA5LCJleHAiOjE3NDU5MTQxMDksImF1ZCI6InllbWUtYXBpIiwiaXNzIjoieWVtZSJ9.aBcD1234
+
+### Login as merchant
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "merchant@example.com",
+  "password": "MerchantPassword123!"
+}
+
+### Test merchant-only endpoint with merchant token
+### Replace with your merchant token from the login response
+GET http://localhost:3001/protected/merchant
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1mM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMzAiLCJlbWFpbCI6Im1lcmNoYW50QGV4YW1wbGUuY29tIiwicm9sZSI6Im1lcmNoYW50IiwiaWF0IjoxNzQ1ODI3NzA5LCJleHAiOjE3NDU5MTQxMDksImF1ZCI6InllbWUtYXBpIiwiaXNzIjoieWVtZSJ9.EfGh5678 

@@ -1,0 +1,56 @@
+### Complete Authentication Flow
+
+### 1. Create a new user (registration)
+POST http://localhost:3001/users
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "firstName": "Test",
+  "lastName": "User",
+  "password": "Password123!",
+  "phoneNumber": "+1234567899"
+}
+
+### 2. Login with the newly created user
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "Password123!"
+}
+
+### 3. Access protected user profile with token
+GET http://localhost:3001/protected/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1kM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMTciLCJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDU4Mjc3MDksImV4cCI6MTc0NTkxNDEwOSwiYXVkIjoieWVtZS1hcGkiLCJpc3MiOiJ5ZW1lIn0.Bjxo54kMdwHiynbQd_n4Msaga18vGJ7PeXDP3Bc4F6Q
+
+### 4. Get current user by ID
+GET http://localhost:3001/users/493a27f0-d3e6-4147-a3db-a9e6c423c117
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1kM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMTciLCJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDU4Mjc3MDksImV4cCI6MTc0NTkxNDEwOSwiYXVkIjoieWVtZS1hcGkiLCJpc3MiOiJ5ZW1lIn0.Bjxo54kMdwHiynbQd_n4Msaga18vGJ7PeXDP3Bc4F6Q
+
+### 5. Update user details
+PATCH http://localhost:3001/users/493a27f0-d3e6-4147-a3db-a9e6c423c117
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1kM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMTciLCJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDU4Mjc3MDksImV4cCI6MTc0NTkxNDEwOSwiYXVkIjoieWVtZS1hcGkiLCJpc3MiOiJ5ZW1lIn0.Bjxo54kMdwHiynbQd_n4Msaga18vGJ7PeXDP3Bc4F6Q
+
+{
+  "firstName": "Updated",
+  "lastName": "Name"
+}
+
+### 6. Verify updated user details
+GET http://localhost:3001/users/493a27f0-d3e6-4147-a3db-a9e6c423c117
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1kM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMTciLCJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDU4Mjc3MDksImV4cCI6MTc0NTkxNDEwOSwiYXVkIjoieWVtZS1hcGkiLCJpc3MiOiJ5ZW1lIn0.Bjxo54kMdwHiynbQd_n4Msaga18vGJ7PeXDP3Bc4F6Q
+
+### 7. Try to access admin-only endpoint (should return 403)
+GET http://localhost:3001/protected/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1kM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMTciLCJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDU4Mjc3MDksImV4cCI6MTc0NTkxNDEwOSwiYXVkIjoieWVtZS1hcGkiLCJpc3MiOiJ5ZW1lIn0.Bjxo54kMdwHiynbQd_n4Msaga18vGJ7PeXDP3Bc4F6Q
+
+### 8. Cleanup: Delete test user
+DELETE http://localhost:3001/users/493a27f0-d3e6-4147-a3db-a9e6c423c117
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1kM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMTciLCJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDU4Mjc3MDksImV4cCI6MTc0NTkxNDEwOSwiYXVkIjoieWVtZS1hcGkiLCJpc3MiOiJ5ZW1lIn0.Bjxo54kMdwHiynbQd_n4Msaga18vGJ7PeXDP3Bc4F6Q
+
+### 9. Verify user is deleted (should return 404)
+GET http://localhost:3001/users/493a27f0-d3e6-4147-a3db-a9e6c423c117
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1kM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMTciLCJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDU4Mjc3MDksImV4cCI6MTc0NTkxNDEwOSwiYXVkIjoieWVtZS1hcGkiLCJpc3MiOiJ5ZW1lIn0.Bjxo54kMdwHiynbQd_n4Msaga18vGJ7PeXDP3Bc4F6Q 

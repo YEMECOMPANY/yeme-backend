@@ -1,0 +1,20 @@
+### First, login to get credentials
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "Password123!"
+}
+
+### Access protected profile endpoint with token
+# Copy your token from the login response above
+GET http://localhost:3001/protected/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OTNhMjdmMC1kM2U2LTQxNDctYTNkYi1hOWU2YzQyM2MxMTciLCJlbWFpbCI6InRlc3R1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDU4Mjc3MDksImV4cCI6MTc0NTkxNDEwOSwiYXVkIjoieWVtZS1hcGkiLCJpc3MiOiJ5ZW1lIn0.Bjxo54kMdwHiynbQd_n4Msaga18vGJ7PeXDP3Bc4F6Q
+
+### Access protected profile endpoint without token (should return 401)
+GET http://localhost:3001/protected/profile
+
+### Access protected profile endpoint with invalid token (should return 401)
+GET http://localhost:3001/protected/profile
+Authorization: Bearer invalid.token.here 

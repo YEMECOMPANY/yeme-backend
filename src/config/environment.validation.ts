@@ -9,8 +9,8 @@ export default Joi.object({
   DB_USERNAME: Joi.string(),
   DB_PASSWORD: Joi.string(),
   DB_DATABASE: Joi.string(),
-  // JWT_SECRET: Joi.string().required(),
-  // JWT_TOKEN_AUDIENCE: Joi.string().required(),
-  // JWT_TOKEN_ISSUER: Joi.string().required(),
-  // JWT_ACCESS_TOKEN_TTL: Joi.number().required().default(3600),
+  JWT_SECRET: Joi.string().required(),
+  JWT_EXPIRES_IN: Joi.string().default('1d'),
+  JWT_AUDIENCE: Joi.string().default('yeme-api'),
+  JWT_ISSUER: Joi.string().default('yeme'),
 });

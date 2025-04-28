@@ -1,0 +1,5 @@
+@host = http://localhost:3001
+@userId = replace-with-actual-user-id
+
+### Delete a user
+DELETE http://localhost:3001/users/replace-with-actual-user-id 

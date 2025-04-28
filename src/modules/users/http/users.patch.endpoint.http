@@ -1,0 +1,24 @@
+### Update a user
+PATCH http://localhost:3001/users/6269dc9c-a401-43f7-8b4b-73c7bcc5e9ec
+Content-Type: application/json
+
+{
+  "firstName": "John Updated",
+  "lastName": "Doe Updated"
+}
+
+### Update user password
+PATCH http://localhost:3001/users/6269dc9c-a401-43f7-8b4b-73c7bcc5e9ec
+Content-Type: application/json
+
+{
+  "password": "NewPassword12345!"
+}
+
+### Update user email
+PATCH http://localhost:3001/users/6269dc9c-a401-43f7-8b4b-73c7bcc5e9ec
+Content-Type: application/json
+
+{
+  "email": "john.updated@example.com"
+} 

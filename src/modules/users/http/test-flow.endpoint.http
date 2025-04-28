@@ -1,0 +1,39 @@
+### Testing the complete user flow
+
+### 1. Create a new user
+POST http://localhost:3001/users
+Content-Type: application/json
+
+{
+  "email": "test.user@example.com",
+  "firstName": "Test",
+  "lastName": "User",
+  "password": "Password123!",
+  "phoneNumber": "+1234567890"
+}
+
+### 2. Get the created user
+### Replace with the ID from the response above
+GET http://localhost:3001/users/replace-after-creation
+
+### 3. Update the user
+### Replace with the ID from the response above
+PATCH http://localhost:3001/users/replace-after-creation
+Content-Type: application/json
+
+{
+  "firstName": "Updated",
+  "lastName": "Test User"
+}
+
+### 4. Get the updated user
+### Replace with the ID from the response above
+GET http://localhost:3001/users/replace-after-creation
+
+### 5. Delete the user
+### Replace with the ID from the response above
+DELETE http://localhost:3001/users/replace-after-creation
+
+### 6. Verify user is deleted (should return 404)
+### Replace with the ID from the response above
+GET http://localhost:3001/users/replace-after-creation 

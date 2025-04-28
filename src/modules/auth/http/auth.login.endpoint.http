@@ -1,0 +1,26 @@
+### Login with existing user credentials
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "Password123!"
+}
+
+### Login with invalid credentials (should return 401)
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "wrongpassword"
+}
+
+### Login with non-existent user (should return 401)
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+  "email": "nonexistent@example.com",
+  "password": "Password123!"
+} 
